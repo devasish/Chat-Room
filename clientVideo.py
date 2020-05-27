@@ -6,7 +6,7 @@ import numpy as np
 import zlib
 import struct
 
-HOST = input("Enter Server IP\n")
+HOST = '127.0.0.1' #input("Enter Server IP\n")
 PORT = 3000
 
 CHUNK=1024
@@ -36,6 +36,7 @@ def SendFrame():
                     databytes = b''
             print("##### Data Sent!! #####")
         except:
+            print("err")
             continue
 
 def RecieveMedia():
@@ -73,7 +74,7 @@ client.connect((HOST, PORT))
 wvs = WebcamVideoStream(0).start()
 
 initiation = client.recv(5).decode()
-
-if initiation == "start":
+print(initiation)
+if initiation == "Welco":
     RecieveFrameThread = Thread(target=RecieveMedia).start()
     SendFrameThread = Thread(target=SendFrame).start()
